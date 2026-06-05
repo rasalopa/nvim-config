@@ -44,6 +44,8 @@ return {
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>",    desc = "Archivos recientes" },
       { "<leader>fh", "<cmd>Telescope help_tags<cr>",   desc = "Ayuda de Neovim" },
       { "<leader>fk", "<cmd>Telescope keymaps<cr>",     desc = "Ver atajos" },
+      -- Cambiar de tema con vista previa en vivo (y se recuerda al reiniciar)
+      { "<leader>ut", function() require("theme-switcher").pick() end, desc = "Cambiar tema (vista previa)" },
       { "<leader>fp", "<cmd>Telescope git_files<cr>",   desc = "Archivos del repo git" },
       {
         "<leader>fe",

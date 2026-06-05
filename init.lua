@@ -38,6 +38,9 @@ require("lazy").setup("plugins", {
   },
 })
 
+-- Aplica el tema recordado (o catppuccin por defecto). Ver lua/theme-switcher.lua
+require("theme-switcher").restore()
+
 -- Atajos estilo Terax (⌘ en Mac / Alt en PC). Ver lua/terax-keys.lua
 require("terax-keys")
 

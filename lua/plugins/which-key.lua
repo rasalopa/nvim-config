@@ -20,6 +20,7 @@ return {
       { "<leader>x", group = "Diagnósticos" },
       { "<leader>c", group = "Claude / Terminal" },
       { "<leader>w", group = "Workspace / sesión" },
+      { "<leader>u", group = "Interfaz / temas" },
       { "<leader>h", group = "Git: cambios (hunks)" },
       { "<leader>q", group = "Salir" },
       { "<leader>sn", group = "Noice (mensajes)" },

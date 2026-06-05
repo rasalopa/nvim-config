@@ -32,7 +32,8 @@ return {
           notify = true,
         },
       })
-      vim.cmd.colorscheme "catppuccin"
+      -- El tema activo lo aplica theme-switcher.restore() al arrancar
+      -- (ver init.lua). Aquí solo dejamos catppuccin configurado y listo.
     end
   }
 }

@@ -17,9 +17,25 @@ return {
     },
   },
   config = function(_, opts)
-    -- Colores de catppuccin si está disponible
-    local ok, cat = pcall(require, "catppuccin.groups.integrations.bufferline")
-    if ok then opts.highlights = cat.get() end
-    require("bufferline").setup(opts)
+    -- Aplica los colores adecuados a las pestañas según el tema activo:
+    -- integración especial de catppuccin si está activo, colores del propio
+    -- tema en cualquier otro caso.
+    local function aplicar_colores()
+      if (vim.g.colors_name or ""):match("^catppuccin") then
+        local ok, cat = pcall(require, "catppuccin.groups.integrations.bufferline")
+        opts.highlights = ok and cat.get() or nil
+      else
+        opts.highlights = nil
+      end
+      require("bufferline").setup(opts)
+    end
+
+    aplicar_colores()
+
+    -- Al cambiar de tema, recoloreamos las pestañas.
+    vim.api.nvim_create_autocmd("ColorScheme", {
+      group = vim.api.nvim_create_augroup("user_bufferline_theme", { clear = true }),
+      callback = aplicar_colores,
+    })
   end,
 }
