@@ -53,11 +53,27 @@ return {
       Terminal:new({ cmd = "ssh " .. host, direction = "tab", close_on_exit = false }):toggle()
     end, { nargs = "?" })
 
-    -- Dentro de cualquier terminal: doble <Esc> para volver a modo normal de Neovim
+    -- Dentro de cualquier terminal: doble <Esc> (rápido) cierra/oculta la terminal
+    -- y te devuelve al editor. El proceso sigue vivo: lo reabres con ⌘R / ⌘I / ⌘G.
+    local function cerrar_terminal()
+      vim.cmd("stopinsert") -- salir del modo escritura de la terminal
+      local id = vim.b.toggle_number -- id que toggleterm pone en el buffer
+      local cerrada = false
+      if id then
+        pcall(function()
+          local term = require("toggleterm.terminal").get(id, true)
+          if term then term:close() end -- cierre "oficial" (estado consistente)
+          cerrada = true
+        end)
+      end
+      if not cerrada then vim.cmd("silent! close") end -- respaldo
+    end
+
     vim.api.nvim_create_autocmd("TermOpen", {
       pattern = "term://*",
-      callback = function()
-        vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { buffer = 0, desc = "Salir de la terminal" })
+      callback = function(ev)
+        vim.keymap.set("t", "<Esc><Esc>", cerrar_terminal,
+          { buffer = ev.buf, desc = "Cerrar / ocultar la terminal" })
       end,
     })
   end,

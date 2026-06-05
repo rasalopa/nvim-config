@@ -59,7 +59,7 @@
 | Terminal flotante               | `⌘R`   | `Alt+r`     |
 | Git (lazygit)                   | `⌘G`   | `Alt+g`     |
 | Sesión SSH                      | `:Ssh usuario@servidor`        ||
-| Salir de una terminal           | `Esc` `Esc` (dos veces)        ||
+| Cerrar / ocultar la terminal    | `Esc` `Esc` (rápido, dos veces)||
 
 ## ✏️ Editor y portapapeles
 
