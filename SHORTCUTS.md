@@ -120,6 +120,16 @@ Pulsa `Espacio` y espera: aparece el menú con todo. Grupos principales:
 | `<Espacio>x`   | **Diagnósticos** (Trouble)                                  |
 | `<Espacio>q`   | **Salir** — `qq` ventana · `qb` buffer · `qQ` todo          |
 
+## 🎓 Aprender los movimientos de Vim
+
+| Recurso                          | Cómo                                   |
+|----------------------------------|----------------------------------------|
+| Modo disciplina (on/off)         | `⌘H` / `Alt+h` · o `<Espacio>uh`       |
+| · Bloquea flechas y avisa si machacas una tecla; sugiere algo mejor ||
+| Juego de práctica                | `:VimBeGood` · o botón del inicio      |
+| Tutorial interactivo de Vim      | `:Tutor` · o botón del inicio          |
+| Truco del día                    | aparece solo en el dashboard al abrir  |
+
 ## 🧭 Movimiento básico de Vim (lo esencial)
 
 | Tecla       | Acción                          |
