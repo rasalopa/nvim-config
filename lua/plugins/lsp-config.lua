@@ -37,20 +37,12 @@ return {
     end,
   },
 
-  -- LSPConfig: configuración específica de cada servidor
+  -- LSPConfig: configuración específica de cada servidor (API nativa de Neovim 0.11+)
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
-
-      -- Lua y PHP
-      lspconfig.lua_ls.setup({})
-      lspconfig.intelephense.setup({})
-      lspconfig.phpactor.setup({})
-      lspconfig.psalm.setup({})
-
-      -- Angular
-      lspconfig.angularls.setup({
+      -- Angular: cmd y entorno personalizados
+      vim.lsp.config("angularls", {
         cmd = {
           "ngserver",
           "--stdio",
@@ -59,23 +51,29 @@ return {
           "--ngProbeLocations",
           "/usr/local/lib/node_modules",
         },
-        on_new_config = function(new_config, _)
-          local env = vim.fn.environ()
-          env["NG_DEBUG"] = "true"
-          new_config.cmd_env = env
-        end,
+        cmd_env = vim.tbl_extend("force", vim.fn.environ(), { NG_DEBUG = "true" }),
       })
 
-      -- HTML / CSS / JSON / YAML
-      lspconfig.html.setup({})
-      lspconfig.cssls.setup({})
-      lspconfig.jsonls.setup({})
-      lspconfig.yamlls.setup({
+      -- YAML: desactivar ordenado de claves
+      vim.lsp.config("yamlls", {
         settings = {
           yaml = {
             keyOrdering = false,
           },
         },
+      })
+
+      -- Activar todos los servidores
+      vim.lsp.enable({
+        "lua_ls",
+        "intelephense",
+        "phpactor",
+        "psalm",
+        "angularls",
+        "html",
+        "cssls",
+        "jsonls",
+        "yamlls",
       })
     end,
   },

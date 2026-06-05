@@ -5,7 +5,7 @@ return {
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
 
-    -- Set header
+    -- Cabecera
     dashboard.section.header.val = {
       "                                                     ",
       "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
@@ -17,22 +17,87 @@ return {
       "                                                     ",
     }
 
-    -- Set menu
+    -- Subtítulo: saludo según la hora + fecha
+    local function greeting()
+      local hour = tonumber(os.date("%H"))
+      local saludo
+      if hour < 6 then
+        saludo = "Buenas noches"
+      elseif hour < 12 then
+        saludo = "Buenos días"
+      elseif hour < 20 then
+        saludo = "Buenas tardes"
+      else
+        saludo = "Buenas noches"
+      end
+      local user = os.getenv("USER") or os.getenv("USERNAME") or "dev"
+      return string.format("  %s, %s  ·  %s", saludo, user, os.date("%A %d %B %Y"))
+    end
+
+    -- Info de Git del directorio actual (rama + nº de cambios)
+    local function git_info()
+      if vim.fn.executable("git") == 0 then
+        return nil
+      end
+      local branch = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD 2>/dev/null")[1]
+      if not branch or branch == "" or vim.v.shell_error ~= 0 then
+        return nil
+      end
+      local changes = vim.fn.systemlist("git status --porcelain 2>/dev/null")
+      local n = #changes
+      if n > 0 then
+        return string.format("   %s  ·  %d cambio%s", branch, n, n == 1 and "" or "s")
+      end
+      return string.format("   %s  ·  limpio", branch)
+    end
+
+    -- Menú
     dashboard.section.buttons.val = {
-      dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
-      dashboard.button("b","  > Toggle file explorer", "<cmd>Neotree toggle<CR>"),
-      dashboard.button("f","󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
-      dashboard.button("g","  > Find Word", "<cmd>Telescope live_grep<CR>"),
-      dashboard.button("r","  > Recent", "<cmd>Telescope oldfiles<CR>"),
+      dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
+      dashboard.button("b", "  > Toggle file explorer", "<cmd>Neotree toggle<CR>"),
+      dashboard.button("f", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
+      dashboard.button("g", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+      dashboard.button("r", "  > Recent", "<cmd>Telescope oldfiles<CR>"),
       dashboard.button("c", "  Claude (IA)", "<cmd>ClaudeToggle<CR>"),
       dashboard.button("s", "  Restaurar sesión anterior", "<cmd>lua require('persistence').load()<CR>"),
-      dashboard.button("q", " > Quit NVIM", "<cmd>qa<CR>"),
+      dashboard.button("C", "  Editar config", "<cmd>lua require('telescope.builtin').find_files({cwd=vim.fn.stdpath('config')})<CR>"),
+      dashboard.button("L", "󰒲  Lazy (plugins)", "<cmd>Lazy<CR>"),
+      dashboard.button("M", "  Mason (LSP/tools)", "<cmd>Mason<CR>"),
+      dashboard.button("q", " > Quit NVIM", "<cmd>qa<CR>"),
     }
 
-    -- Send config to alpha
+    -- Pie: saludo + git + estadísticas (plugins + tiempo de arranque)
+    local function footer()
+      local lines = { greeting() }
+      local git = git_info()
+      if git then
+        table.insert(lines, git)
+      end
+      local ok, lazy = pcall(require, "lazy")
+      if ok then
+        local stats = lazy.stats()
+        local ms = math.floor(stats.startuptime * 100 + 0.5) / 100
+        table.insert(lines, "")
+        table.insert(lines, string.format("  %d plugins cargados en %s ms", stats.loaded, ms))
+      end
+      return lines
+    end
+
     alpha.setup(dashboard.opts)
 
-    -- Disable folding on alpha buffer
+    -- Refrescar el pie cuando lazy termina de cargar (stats reales)
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "LazyVimStarted",
+      callback = function()
+        dashboard.section.footer.val = footer()
+        pcall(vim.cmd.AlphaRedraw)
+      end,
+    })
+
+    -- Pie inicial (las stats llegan tras LazyVimStarted)
+    dashboard.section.footer.val = footer()
+
+    -- Sin folding en el buffer de alpha
     vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
   end,
 }
