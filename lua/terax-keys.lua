@@ -51,7 +51,7 @@ map(nt,  mk("["), "<C-w>W",          { desc = "Foco panel anterior" })
 map(nt, mk("g"), "<cmd>LazygitToggle<cr>", { desc = "Git (lazygit)" })
 
 -- ── VISTA (View) ────────────────────────────────────────────────────────
-map(nvi, mk("b"), "<cmd>Neotree toggle<cr>",        { desc = "Explorador de archivos" })
+map(nvi, mk("b"), function() util.smart_explorer() end, { desc = "Explorador de archivos" })
 map(nvi, ms("e"), "<cmd>Neotree focus<cr>",         { desc = "Foco en explorador" })
 map(nv,  mk("="), function() util.zoom(0.1) end,    { desc = "Zoom +" })
 map(nv,  mk("-"), function() util.zoom(-0.1) end,   { desc = "Zoom -" })

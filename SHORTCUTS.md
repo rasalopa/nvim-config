@@ -39,9 +39,12 @@
 
 | Acción                          | Mac    | PC            |
 |---------------------------------|--------|---------------|
-| Explorador de archivos          | `⌘B`   | `Alt+b`       |
+| Explorador (abrir · ir al foco · ocultar) | `⌘B` | `Alt+b` |
 | Foco en el explorador           | `⌘⇧E`  | `Alt+Shift+E` |
 | Zoom + / − / reset              | `⌘=` `⌘-` `⌘0` | `Alt+=` `Alt+-` `Alt+0` |
+
+> `⌘B` es inteligente: si el explorador está cerrado lo abre, si está abierto
+> pero sin foco te lleva a él, y si ya estás dentro lo oculta.
 
 ## 🔍 Búsqueda
 
@@ -55,11 +58,14 @@
 
 | Acción                          | Mac    | PC          |
 |---------------------------------|--------|-------------|
-| Claude (IA)                     | `⌘I`   | `Alt+i`     |
+| Claude (abrir · ir al foco · ocultar) | `⌘I` | `Alt+i` |
 | Terminal flotante               | `⌘R`   | `Alt+r`     |
 | Git (lazygit)                   | `⌘G`   | `Alt+g`     |
 | Sesión SSH                      | `:Ssh usuario@servidor`        ||
 | Cerrar / ocultar la terminal    | `Esc` `Esc` (rápido, dos veces)||
+
+> `⌘I` es inteligente igual que `⌘B`: si estás en otro panel te lleva el foco a
+> Claude en vez de ocultarlo; solo lo oculta si ya estás dentro.
 
 ## ✏️ Editor y portapapeles
 

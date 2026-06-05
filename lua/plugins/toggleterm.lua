@@ -35,7 +35,22 @@ return {
     local float   = Terminal:new({ direction = "float", hidden = true })
     local lazygit = Terminal:new({ cmd = "lazygit", direction = "float", hidden = true })
 
-    vim.api.nvim_create_user_command("ClaudeToggle", function() claude:toggle() end, {})
+    -- ⌘I inteligente:
+    --   · Cerrado            → lo abre
+    --   · Abierto, sin foco  → te lleva el foco a Claude (no lo oculta)
+    --   · Abierto, con foco  → lo oculta
+    vim.api.nvim_create_user_command("ClaudeToggle", function()
+      if claude:is_open() then
+        if vim.api.nvim_get_current_win() == claude.window then
+          claude:close()
+        else
+          vim.api.nvim_set_current_win(claude.window)
+          vim.cmd("startinsert")
+        end
+      else
+        claude:open()
+      end
+    end, {})
     vim.api.nvim_create_user_command("FloatTerm",    function() float:toggle() end, {})
 
     vim.api.nvim_create_user_command("LazygitToggle", function()

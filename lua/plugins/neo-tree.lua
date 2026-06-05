@@ -15,7 +15,7 @@ return {
         },
         window = {
           position = "left",
-          width = 30,
+          width = 38,
           mappings = {
             -- ["<C-n>"] = "reveal", -- Disabled due to invalid action
           },
