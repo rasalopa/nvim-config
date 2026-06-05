@@ -24,6 +24,13 @@ vim.opt.clipboard = "unnamedplus" -- usa el portapapeles del sistema (copiar/peg
 -- Fuente con iconos para Neovide (en PC instala "Hack Nerd Font" para verlos)
 vim.opt.guifont = "Hack Nerd Font:h14"
 
+-- Calidad de vida
+vim.opt.undofile = true       -- historial de deshacer persistente entre sesiones
+vim.opt.updatetime = 250      -- respuesta más rápida (git blame en línea, etc.)
+vim.opt.timeoutlen = 400      -- el menú de which-key aparece más rápido
+vim.opt.inccommand = "split"  -- vista previa en vivo al hacer sustituciones (:s)
+vim.opt.confirm = true        -- preguntar (en vez de fallar) si hay cambios sin guardar
+
 -- Opcional: espacio visual adicional alrededor del texto (requiere soporte GUI como Neovide)
 -- vim.opt.guifont = "FiraCode Nerd Font:h14"
 vim.opt.linespace = 4

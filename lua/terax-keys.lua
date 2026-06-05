@@ -32,13 +32,13 @@ map(nv,  mk("k"), "<cmd>WhichKey<cr>",      { desc = "Ver atajos" })
 map("n", mk("q"), "<cmd>confirm qall<cr>",  { desc = "Salir" })
 
 -- ── PESTAÑAS (Tabs) ─────────────────────────────────────────────────────
-map(nvi, mk("t"),     "<cmd>tabnew<cr>",                 { desc = "Pestaña nueva" })
+map(nvi, mk("t"),     "<cmd>enew<cr>",                   { desc = "Archivo/pestaña nueva" })
 map(nvi, mk("e"),     "<cmd>enew<cr>",                   { desc = "Archivo nuevo" })
-map("n", mk("w"),     function() util.smart_close() end, { desc = "Cerrar panel/pestaña" })
-map(nti, "<C-Tab>",   "<cmd>tabnext<cr>",                { desc = "Pestaña siguiente" })
-map(nti, "<C-S-Tab>", "<cmd>tabprevious<cr>",            { desc = "Pestaña anterior" })
+map("n", mk("w"),     function() util.smart_close() end, { desc = "Cerrar archivo/panel" })
+map(nti, "<C-Tab>",   "<cmd>BufferLineCycleNext<cr>",    { desc = "Archivo siguiente" })
+map(nti, "<C-S-Tab>", "<cmd>BufferLineCyclePrev<cr>",    { desc = "Archivo anterior" })
 for i = 1, 9 do
-  map(nvi, mk(tostring(i)), i .. "gt", { desc = "Ir a pestaña " .. i })
+  map(nvi, mk(tostring(i)), "<cmd>BufferLineGoToBuffer " .. i .. "<cr>", { desc = "Ir al archivo " .. i })
 end
 
 -- ── PANELES (Splits) ────────────────────────────────────────────────────

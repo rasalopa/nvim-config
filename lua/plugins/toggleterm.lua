@@ -16,6 +16,10 @@ return {
   opts = {
     direction = "float",
     shade_terminals = true,
+    size = function(term)
+      if term.direction == "vertical" then return math.floor(vim.o.columns * 0.42) end
+      return 20
+    end,
     float_opts = {
       border = "curved",
       width  = function() return math.floor(vim.o.columns * 0.85) end,
@@ -27,7 +31,7 @@ return {
     local Terminal = require("toggleterm.terminal").Terminal
 
     -- Terminales dedicadas (persistentes, ocultas hasta que las invocas)
-    local claude  = Terminal:new({ cmd = "claude", direction = "float", hidden = true })
+    local claude  = Terminal:new({ cmd = "claude", direction = "vertical", hidden = true })
     local float   = Terminal:new({ direction = "float", hidden = true })
     local lazygit = Terminal:new({ cmd = "lazygit", direction = "float", hidden = true })
 

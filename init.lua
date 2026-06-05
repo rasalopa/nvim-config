@@ -40,3 +40,6 @@ require("lazy").setup("plugins", {
 
 -- Atajos estilo Terax (⌘ en Mac / Alt en PC). Ver lua/terax-keys.lua
 require("terax-keys")
+
+-- Autocomandos de calidad de vida (autoguardado, formato al guardar, etc.)
+require("autocmds")

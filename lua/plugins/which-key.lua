@@ -19,6 +19,8 @@ return {
       { "<leader>t", group = "TODOs" },
       { "<leader>x", group = "Diagnósticos" },
       { "<leader>c", group = "Claude / Terminal" },
+      { "<leader>w", group = "Workspace / sesión" },
+      { "<leader>h", group = "Git: cambios (hunks)" },
       { "<leader>q", group = "Salir" },
       { "<leader>sn", group = "Noice (mensajes)" },
 

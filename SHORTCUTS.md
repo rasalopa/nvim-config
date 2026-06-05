@@ -17,15 +17,14 @@
 | Abrir la config                 | `⌘,`  | `Alt+,` |
 | Salir                           | `⌘Q`  | `Alt+q` |
 
-## 🗂️ Pestañas
+## 🗂️ Archivos abiertos (pestañas de arriba)
 
 | Acción                          | Mac        | PC             |
 |---------------------------------|------------|----------------|
-| Pestaña nueva                   | `⌘T`       | `Alt+t`        |
-| Archivo nuevo                   | `⌘E`       | `Alt+e`        |
-| Cerrar panel / pestaña          | `⌘W`       | `Alt+w`        |
-| Pestaña siguiente / anterior    | `⌃Tab` / `⌃⇧Tab` | (igual)  |
-| Ir a la pestaña 1–9             | `⌘1`–`⌘9`  | `Alt+1`–`Alt+9`|
+| Nuevo archivo                   | `⌘T` / `⌘E`| `Alt+t` / `Alt+e` |
+| Cerrar archivo / panel          | `⌘W`       | `Alt+w`        |
+| Archivo siguiente / anterior    | `⌃Tab` / `⌃⇧Tab` | (igual)  |
+| Ir al archivo 1–9               | `⌘1`–`⌘9`  | `Alt+1`–`Alt+9`|
 
 ## ⊞ Paneles (splits)
 
@@ -73,6 +72,30 @@
 
 ---
 
+## ✏️ Edición
+
+| Acción                          | Teclas                              |
+|---------------------------------|-------------------------------------|
+| Comentar línea / selección      | `gcc` · `gc` (en visual)            |
+| Rodear con `()` `""` etc.       | `gsa` + movimiento o selección      |
+| Quitar lo que rodea             | `gsd` + el símbolo (ej. `gsd"`)     |
+| Cambiar lo que rodea            | `gsr` + viejo + nuevo (ej. `gsr"'`) |
+| Auto-cerrar paréntesis/comillas | automático                          |
+| Autoguardar                     | automático (al cambiar de archivo)  |
+| Formato al guardar              | automático · `:FormatToggle` apaga  |
+
+## 💾 Workspace y Git
+
+| Acción                          | Atajo                                  |
+|---------------------------------|----------------------------------------|
+| Restaurar sesión (esta carpeta) | `<Espacio>ws`  · o el botón del inicio |
+| Restaurar última sesión         | `<Espacio>wl`                          |
+| Siguiente / anterior cambio git | `]h` / `[h`                            |
+| Previsualizar cambio            | `<Espacio>hp`                          |
+| Aplicar (stage) cambio          | `<Espacio>hs`                          |
+| Descartar cambio                | `<Espacio>hr`                          |
+| Quién cambió esta línea         | `<Espacio>hb`                          |
+
 ## 🚀 Universal — `<Espacio>` (funciona también en terminal)
 
 Pulsa `Espacio` y espera: aparece el menú con todo. Grupos principales:
@@ -83,6 +106,8 @@ Pulsa `Espacio` y espera: aparece el menú con todo. Grupos principales:
 | `<Espacio>g`   | **Git** — `gs` status · `gc` commits · `gb` ramas           |
 | `<Espacio>e`   | **Explorador** — `ee` abrir/cerrar · `ef` foco              |
 | `<Espacio>c`   | **Claude/Terminal** — `cc` Claude · `cf` terminal · `cg` lazygit · `cs` SSH |
+| `<Espacio>w`   | **Workspace** — `ws` restaurar sesión · `wl` última · `wd` no guardar |
+| `<Espacio>h`   | **Git cambios** — `hp` previsualizar · `hs` stage · `hr` descartar · `hb` blame |
 | `<Espacio>l`   | **LSP** — `lr` renombrar · `la` acción · `lf` formatear · `lh` info |
 | `<Espacio>a`   | **Laravel** — `aa` artisan · `ar` rutas · `am` relacionados |
 | `<Espacio>t`   | **TODOs**                                                   |

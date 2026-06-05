@@ -25,6 +25,7 @@ return {
       dashboard.button("g","  > Find Word", "<cmd>Telescope live_grep<CR>"),
       dashboard.button("r","  > Recent", "<cmd>Telescope oldfiles<CR>"),
       dashboard.button("c", "  Claude (IA)", "<cmd>ClaudeToggle<CR>"),
+      dashboard.button("s", "  Restaurar sesión anterior", "<cmd>lua require('persistence').load()<CR>"),
       dashboard.button("q", " > Quit NVIM", "<cmd>qa<CR>"),
     }
 
