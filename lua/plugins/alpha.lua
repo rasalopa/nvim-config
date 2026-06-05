@@ -20,10 +20,11 @@ return {
     -- Set menu
     dashboard.section.buttons.val = {
       dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
-      dashboard.button("C-n", "  > Toggle file explorer", "<cmd>Neotree filesystem reveal left<CR>"),
-      dashboard.button("<leader>ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
-      dashboard.button("<leader>lg", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
-      dashboard.button("<leader>of", "  > Recent", "<cmd>Telescope oldfiles<CR>"),
+      dashboard.button("b","  > Toggle file explorer", "<cmd>Neotree toggle<CR>"),
+      dashboard.button("f","󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
+      dashboard.button("g","  > Find Word", "<cmd>Telescope live_grep<CR>"),
+      dashboard.button("r","  > Recent", "<cmd>Telescope oldfiles<CR>"),
+      dashboard.button("c", "  Claude (IA)", "<cmd>ClaudeToggle<CR>"),
       dashboard.button("q", " > Quit NVIM", "<cmd>qa<CR>"),
     }
 

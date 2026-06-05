@@ -1,59 +1,102 @@
-# 🛠️ Configuración de Neovim personalizada por rasalopa
+# 🛠️ Neovim como workspace tipo terminal (estilo Terax)
 
-Este repositorio contiene mi configuración de Neovim, optimizada para desarrollo backend/frontend con soporte para LSP, autocompletado, depuración, temas visuales modernos y mejoras de experiencia de usuario.
+Configuración de Neovim pensada como **terminal/workspace**: árbol de archivos al
+lado, Claude integrado, terminales para SSH y un esquema de atajos al estilo Terax.
+Funciona en **Mac y PC** (Windows/Linux).
 
----
+> Pensado para usarse con **Neovide** (la GUI de Neovim), porque es la única forma
+> de tener atajos con la tecla ⌘ en Mac. Ábrelo escribiendo `neovide` en tu terminal.
 
-## 📦 Plugins utilizados
-
-Los siguientes plugins fueron instalados usando [lazy.nvim](https://github.com/folke/lazy.nvim):
-
-### Lenguajes y LSP
-- `nvim-lspconfig`: Configuración base para LSPs.
-- `mason.nvim` + `mason-lspconfig.nvim`: Instalación y gestión automática de servidores LSP.
-- `typescript-tools.nvim`: Soporte extendido para TypeScript.
-- `none-ls.nvim`: Linter/formatter unificado vía Null-LS.
-- `nvim-dap`: Depuración de código con soporte para adapters.
-
-### UI y Experiencia
-- `catppuccin.nvim`: Tema visual moderno (actualmente `catppuccin-mocha`).
-- `lualine.nvim`: Barra de estado.
-- `noice.nvim`: UI para mensajes de Neovim.
-- `alpha-nvim`: Dashboard inicial con arte ASCII personalizado.
-- `which-key.nvim`: Ayuda visual para atajos de teclado.
-- `flash.nvim`: Mejora de navegación por texto.
-- `telescope.nvim`: Fuzzy finder para archivos, buffers, comandos, etc.
-
-### Productividad
-- `nvim-cmp`: Autocompletado inteligente.
-- `LuaSnip`: Snippets.
-- `todo-comments.nvim`: Gestión de comentarios tipo TODO/FIX/NOTE/etc.
-- `markdown-preview.nvim`: Vista previa de archivos Markdown.
+> 💡 **Chuleta rápida**: dentro de Neovim pulsa `⌘/` (Mac) / `Alt+/` (PC) o escribe
+> `:Atajos` para ver todos los atajos en una ventana flotante. También en
+> [`SHORTCUTS.md`](SHORTCUTS.md).
 
 ---
 
-## 🧩 Keybindings importantes
+## ⌨️ Atajos estilo Terax (modificador)
 
-Estos están gestionados con `which-key.nvim`. Algunos de los principales:
+El modificador cambia solo según el sistema operativo:
 
-| Atajo         | Acción                       |
-|---------------|------------------------------|
-| `<leader>ff`  | Buscar archivos (Telescope)  |
-| `<leader>fb`  | Buffers abiertos             |
-| `<leader>gg`  | Git (lazygit)                |
-| `<leader>dc`  | Iniciar depuración           |
-| `<leader>td`  | Ver todos los TODO comments  |
-| `s`           | Flash jump                   |
+| | Mac | Windows / Linux |
+|---|---|---|
+| **Modificador** | **⌘ (Cmd)** | **Alt** |
+
+> ¿Por qué Alt en PC? Porque `Ctrl` está reservado por Vim y la tecla `Win` se la
+> queda el sistema. (En Mac los ⌘ solo funcionan dentro de **Neovide**.)
+
+| Acción | Mac | PC | |
+|---|---|---|---|
+| Abrir archivo (quick open) | `⌘P` | `Alt+p` | Telescope |
+| Buscar texto en el proyecto | `⌘⇧F` | `Alt+Shift+F` | live grep |
+| Buscar en el archivo actual | `⌘F` | `Alt+f` | |
+| Explorador de archivos | `⌘B` | `Alt+b` | abrir/cerrar |
+| Foco en el explorador | `⌘⇧E` | `Alt+Shift+E` | |
+| **Claude (IA)** | `⌘I` | `Alt+i` | flotante |
+| Terminal flotante | `⌘R` | `Alt+r` | |
+| Git (lazygit) | `⌘G` | `Alt+g` | |
+| Pestaña nueva | `⌘T` | `Alt+t` | |
+| Archivo nuevo | `⌘E` | `Alt+e` | |
+| Cerrar panel/pestaña | `⌘W` | `Alt+w` | |
+| Cambiar de pestaña | `⌃Tab` / `⌃⇧Tab` | igual | |
+| Ir a pestaña 1–9 | `⌘1`–`⌘9` | `Alt+1`–`Alt+9` | |
+| Dividir panel → derecha | `⌘D` | `Alt+d` | |
+| Dividir panel ↓ abajo | `⌘⇧D` | `Alt+Shift+D` | |
+| Foco panel siguiente/anterior | `⌘]` / `⌘[` | `Alt+]` / `Alt+[` | |
+| Zoom +/−/reset | `⌘=` `⌘-` `⌘0` | `Alt+=` `Alt+-` `Alt+0` | |
+| Copiar / Cortar / Pegar | `⌘C` `⌘X` `⌘V` | `Alt+c` `Alt+x` `Alt+v` | |
+| Seleccionar todo | `⌘A` | `Alt+a` | |
+| Guardar | `⌘S` | `Alt+s` | |
+| Deshacer / Rehacer | `⌘Z` / `⌘⇧Z` | `Alt+z` / `Alt+Shift+Z` | |
+| Ver este menú de atajos | `⌘K` | `Alt+k` | which-key |
 
 ---
 
-## 🖥️ UI Personalizada con Neovide
+## 🚀 Atajos universales `<leader>` (la barra espaciadora)
 
-Neovide es una GUI para Neovim que permite personalizaciones visuales adicionales:
+Funcionan **igual en Mac y PC**, y también dentro de una terminal (no solo Neovide).
+Pulsa `Espacio` y espera: aparece el menú de ayuda (**which-key**).
 
-```lua
-vim.g.neovide_scale_factor = 1.0
-vim.g.neovide_padding_top = 10
-vim.g.neovide_padding_bottom = 10
-vim.g.neovide_padding_right = 10
-vim.g.neovide_padding_left = 10
+| Prefijo | Grupo |
+|---|---|
+| `<Espacio>f` | **Buscar** (archivos, texto, buffers, recientes…) |
+| `<Espacio>g` | **Git** (status, commits, ramas) |
+| `<Espacio>e` | **Explorador** de archivos |
+| `<Espacio>c` | **Claude / Terminal** (`cc` Claude, `cf` terminal, `cg` lazygit, `cs` SSH) |
+| `<Espacio>l` | **LSP** (renombrar, acción de código, formatear…) |
+| `<Espacio>a` | **Laravel** (artisan, rutas, relacionados) |
+| `<Espacio>t` | **TODOs** |
+| `<Espacio>x` | **Diagnósticos** (Trouble) |
+| `<Espacio>q` | **Salir / cerrar buffer** |
+
+---
+
+## 🤖 Terminal: Claude, SSH y Git
+
+- **Claude**: `⌘I` / `Alt+i` (o `<Espacio>cc`) — abre/cierra Claude en un panel flotante.
+- **SSH**: `:Ssh usuario@servidor` (o `<Espacio>cs`) — abre la sesión en una pestaña.
+- **Lazygit**: `⌘G` / `Alt+g` (o `<Espacio>cg`).
+- **Terminal suelta**: `⌘R` / `Alt+r` (o `<Espacio>cf`).
+- Dentro de una terminal, pulsa **`Esc` `Esc`** (dos veces) para volver a Neovim.
+
+---
+
+## 💻 Usarlo en otra computadora (Mac ↔ PC)
+
+1. Clona este repo en la carpeta de config de Neovim:
+   - **Mac/Linux**: `~/.config/nvim`
+   - **Windows**: `~/AppData/Local/nvim`
+2. Abre Neovim/Neovide una vez: lazy.nvim instala todo solo.
+3. **Instala una Nerd Font** para ver los iconos (en Mac ya tienes *Hack Nerd Font*).
+4. Opcional: `brew install lazygit` (Mac) para el atajo de Git.
+
+> En Windows, `telescope-fzf-native` necesita `cmake`. Si no lo tienes, no pasa nada:
+> el buscador sigue funcionando (solo un poco más lento). Lo demás funciona igual.
+
+---
+
+## 📦 Plugins principales
+
+Explorador `neo-tree` · Buscador `telescope` · Terminales `toggleterm` · Tema
+`catppuccin` · Barra `lualine` · Atajos `which-key` · LSP `mason` + `lspconfig` ·
+Autocompletado `nvim-cmp` · Sintaxis `treesitter` · Diagnósticos `trouble` ·
+Mensajes `noice` + `notify` · Dashboard `alpha`.

@@ -1,4 +1,10 @@
-vim.g.python3_host_prog = os.getenv("HOME") .. "/.venvs/nvim/bin/python"
+-- Python host (opcional): solo se activa si existe el venv. Portable Mac/PC.
+local py = vim.fn.has("win32") == 1
+    and vim.fn.expand("~/.venvs/nvim/Scripts/python.exe")
+    or vim.fn.expand("~/.venvs/nvim/bin/python")
+if vim.fn.filereadable(py) == 1 then
+  vim.g.python3_host_prog = py
+end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -32,28 +38,5 @@ require("lazy").setup("plugins", {
   },
 })
 
-vim.api.nvim_create_user_command("Alpha", function()
-  local picker = require("telescope.pickers")
-  local finders = require("telescope.finders")
-  local actions = require("telescope.actions")
-  local action_state = require("telescope.actions.state")
-  local conf = require("telescope.config").values
-
-  picker.new({}, {
-    prompt_title = "Alpha",
-    finder = finders.new_table({
-      results = { "alpha", "beta", "delta", "omega" }
-    }),
-    sorter = conf.generic_sorter(),
-    previewer = false,
-    attach_mappings = function (_, map)
-      map("i", "<cr>", function (promt_bufnr)
-        actions.close(promt_bufnr)
-        local entry = action_state.get_selected_entry()
-        vim.notify(entry[1])
-      end)
-
-      return true
-    end,
-  }):find()
-end, {})
+-- Atajos estilo Terax (⌘ en Mac / Alt en PC). Ver lua/terax-keys.lua
+require("terax-keys")

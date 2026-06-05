@@ -16,14 +16,21 @@ vim.opt.signcolumn = "yes"       -- siempre mostrar el margen de signos
 vim.opt.scrolloff = 8            -- deja espacio al mover el cursor
 vim.opt.linebreak = true         -- no romper palabras al final de línea
 vim.opt.cursorline = true        -- resalta la línea actual
+vim.opt.splitright = true        -- los splits verticales abren a la DERECHA
+vim.opt.splitbelow = true        -- los splits horizontales abren ABAJO
+vim.opt.mouse = "a"              -- ratón habilitado (cómodo para paneles)
+vim.opt.clipboard = "unnamedplus" -- usa el portapapeles del sistema (copiar/pegar)
+
+-- Fuente con iconos para Neovide (en PC instala "Hack Nerd Font" para verlos)
+vim.opt.guifont = "Hack Nerd Font:h14"
 
 -- Opcional: espacio visual adicional alrededor del texto (requiere soporte GUI como Neovide)
-vim.opt.guifont = "FiraCode Nerd Font:h14"
+-- vim.opt.guifont = "FiraCode Nerd Font:h14"
 vim.opt.linespace = 4
 
 if vim.g.neovide then
-  -- Fuente (ya especificada antes)
-  vim.opt.guifont = "FiraCode Nerd Font:h14"
+  -- Nivel de zoom inicial (lo cambian ⌘=/⌘- en Mac, Alt+=/Alt+- en PC)
+  vim.g.neovide_scale_factor = vim.g.neovide_scale_factor or 1.0
 
   -- Espaciado entre líneas
   vim.opt.linespace = 4
