@@ -8,6 +8,9 @@ return {
     options = {
       mode = "buffers",
       diagnostics = "nvim_lsp",
+      -- Desactiva la opción deprecada (default de bufferline) para que no
+      -- salte el warning cada vez que recargamos el tema.
+      diagnostics_update_in_insert = false,
       always_show_bufferline = true,
       show_buffer_close_icons = true,
       separator_style = "thin",
