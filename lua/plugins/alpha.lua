@@ -5,8 +5,8 @@ return {
     local alpha = require("alpha")
     local dashboard = require("alpha.themes.dashboard")
 
-    -- Cabecera
-    dashboard.section.header.val = {
+    -- Arte ASCII de la cabecera
+    local header_art = {
       "                                                     ",
       "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
       "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
@@ -16,6 +16,31 @@ return {
       "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
       "                                                     ",
     }
+
+    -- ── Recordar si la cabecera está oculta entre reinicios ──
+    local flag_file = vim.fn.stdpath("state") .. "/alpha_header_hidden"
+    local function header_hidden()
+      return vim.fn.filereadable(flag_file) == 1
+    end
+    local function save_header_pref(hidden)
+      if hidden then
+        vim.fn.writefile({}, flag_file)
+      else
+        vim.fn.delete(flag_file)
+      end
+    end
+
+    -- Cabecera (vacía si el usuario la ocultó)
+    dashboard.section.header.val = header_hidden() and { "" } or header_art
+
+    -- Atajo para ocultar / mostrar la cabecera (recuerda la elección)
+    vim.keymap.set("n", "<leader>uh", function()
+      local now_hidden = not header_hidden()
+      save_header_pref(now_hidden)
+      dashboard.section.header.val = now_hidden and { "" } or header_art
+      pcall(vim.cmd.AlphaRedraw)
+      vim.notify(now_hidden and "Cabecera oculta" or "Cabecera visible", vim.log.levels.INFO)
+    end, { desc = "Dashboard: ocultar/mostrar cabecera" })
 
     -- Subtítulo: saludo según la hora + fecha
     local function greeting()
